@@ -4,6 +4,8 @@ from flask import request, jsonify
 import os
 import json
 
+from app.task_runner import Task
+
 # Example endpoint definition
 @webserver.route('/api/post_endpoint', methods=['POST'])
 def post_endpoint():
@@ -40,97 +42,124 @@ def get_response(job_id):
 
 @webserver.route('/api/states_mean', methods=['POST'])
 def states_mean_request():
-    # Get request data
     data = request.json
-    print(f"Got request {data}")
 
-    # TODO
-    # Register job. Don't wait for task to finish
-    # Increment job_id counter
-    # Return associated job_id
+    webserver.job_counter += 1
+    endpoint = '/api/states_mean'
+    question = data['question']
+    task_data = (endpoint, question)
+    task_to_enqueue = Task(webserver.job_counter, task_data)
+    webserver.tasks_runner.add_task(task_to_enqueue)
 
-    return jsonify({"status": "NotImplemented"})
+    return jsonify({'job_id': webserver.job_counter}), 201
 
 @webserver.route('/api/state_mean', methods=['POST'])
 def state_mean_request():
-    # TODO
-    # Get request data
-    # Register job. Don't wait for task to finish
-    # Increment job_id counter
-    # Return associated job_id
+    data = request.json
 
-    return jsonify({"status": "NotImplemented"})
+    webserver.job_counter += 1
+    endpoint = '/api/state_mean'
+    question = data['question']
+    state = data['state']
+    task_data = (endpoint, question, state)
+    task_to_enqueue = Task(webserver.job_counter, task_data)
+    webserver.tasks_runner.add_task(task_to_enqueue)
+
+    return jsonify({'job_id': webserver.job_counter}), 201
 
 
 @webserver.route('/api/best5', methods=['POST'])
 def best5_request():
-    # TODO
-    # Get request data
-    # Register job. Don't wait for task to finish
-    # Increment job_id counter
-    # Return associated job_id
+    data = request.json
+    
+    webserver.job_counter += 1
+    endpoint = '/api/best5'
+    question = data['question']
+    task_data = (endpoint, question)
+    task_to_enqueue = Task(webserver.job_counter, task_data)
+    webserver.tasks_runner.add_task(task_to_enqueue)
+    return jsonify({'job_id': webserver.job_counter}), 201
 
-    return jsonify({"status": "NotImplemented"})
 
 @webserver.route('/api/worst5', methods=['POST'])
 def worst5_request():
-    # TODO
-    # Get request data
-    # Register job. Don't wait for task to finish
-    # Increment job_id counter
-    # Return associated job_id
+    data = request.json
 
-    return jsonify({"status": "NotImplemented"})
+    webserver.job_counter += 1
+    endpoint = '/api/worst5'
+    question = data['question']
+    task_data = (endpoint, question)
+    task_to_enqueue = Task(webserver.job_counter, task_data)
+    webserver.tasks_runner.add_task(task_to_enqueue)
+
+    return jsonify({'job_id': webserver.job_counter}), 201
 
 @webserver.route('/api/global_mean', methods=['POST'])
 def global_mean_request():
-    # TODO
-    # Get request data
-    # Register job. Don't wait for task to finish
-    # Increment job_id counter
-    # Return associated job_id
+    data = request.json
 
-    return jsonify({"status": "NotImplemented"})
+    webserver.job_counter += 1
+    endpoint = '/api/global_mean'
+    question = data['question']
+    task_data = (endpoint, question)
+    task_to_enqueue = Task(webserver.job_counter, task_data)
+    webserver.tasks_runner.add_task(task_to_enqueue)
+
+    return jsonify({'job_id': webserver.job_counter}), 201
 
 @webserver.route('/api/diff_from_mean', methods=['POST'])
 def diff_from_mean_request():
-    # TODO
-    # Get request data
-    # Register job. Don't wait for task to finish
-    # Increment job_id counter
-    # Return associated job_id
+    data = request.json
+    
+    webserver.job_counter += 1
+    endpoint = '/api/diff_from_mean'
+    question = data['question']
+    task_data = (endpoint, question)
+    task_to_enqueue = Task(webserver.job_counter, task_data)
+    webserver.tasks_runner.add_task(task_to_enqueue)
+    return jsonify({'job_id': webserver.job_counter}), 201
 
-    return jsonify({"status": "NotImplemented"})
 
 @webserver.route('/api/state_diff_from_mean', methods=['POST'])
 def state_diff_from_mean_request():
-    # TODO
-    # Get request data
-    # Register job. Don't wait for task to finish
-    # Increment job_id counter
-    # Return associated job_id
+    data = request.json
 
-    return jsonify({"status": "NotImplemented"})
+    webserver.job_counter += 1
+    endpoint = '/api/state_diff_from_mean'
+    question = data['question']
+    state = data['state']
+    task_data = (endpoint, question, state)
+    task_to_enqueue = Task(webserver.job_counter, task_data)
+    webserver.tasks_runner.add_task(task_to_enqueue)
+
+    return jsonify({'job_id': webserver.job_counter}), 201
 
 @webserver.route('/api/mean_by_category', methods=['POST'])
 def mean_by_category_request():
-    # TODO
-    # Get request data
-    # Register job. Don't wait for task to finish
-    # Increment job_id counter
-    # Return associated job_id
+    data = request.json
 
-    return jsonify({"status": "NotImplemented"})
+    webserver.job_counter += 1
+    endpoint = '/api/mean_by_category'
+    question = data['question']
+    task_data = (endpoint, question)
+    task_to_enqueue = Task(webserver.job_counter, task_data)
+    webserver.tasks_runner.add_task(task_to_enqueue)
+
+    return jsonify({'job_id': webserver.job_counter}), 201
 
 @webserver.route('/api/state_mean_by_category', methods=['POST'])
 def state_mean_by_category_request():
-    # TODO
-    # Get request data
-    # Register job. Don't wait for task to finish
-    # Increment job_id counter
-    # Return associated job_id
+    data = request.json
 
-    return jsonify({"status": "NotImplemented"})
+    webserver.job_counter += 1
+    endpoint = '/api/state_mean_by_category'
+    question = data['question']
+    state = data['state']
+    task_data = (endpoint, question, state)
+    task_to_enqueue = Task(webserver.job_counter, task_data)
+    webserver.tasks_runner.add_task(task_to_enqueue)
+
+    return jsonify({'job_id': webserver.job_counter}), 201
 
 # You can check localhost in your browser to see what this displays
 @webserver.route('/')
